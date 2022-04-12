@@ -38,11 +38,11 @@ exports.postRegister = async (req, res, next) => {
     // Check if user exists already
     let user = await User.findOne({ email: email });
     if (user) {
-        return res.json({ success: false, message: "User already registered with that email" });
+        return res.json({ success: false, message: "Sorry Email is already taken" });
     }
     user = await Vendor.findOne({ email: email });
     if (user) {
-        return res.json({ success: false, message: "Sorry Email already taken" });
+        return res.json({ success: false, message: "Sorry Email is already taken" });
     }
 
     // Hashing Password
