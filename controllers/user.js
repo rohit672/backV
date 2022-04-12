@@ -5,7 +5,7 @@ const fs = require("fs");
 
 // PUT the updated user and return updated user
 exports.putUser = async (req, res, next) => {
-    let { name, email, contact, street, city, postal_code, country } = req.body;
+    let { name, email, contact, city , locality } = req.body;
     const user = await User.findById(req.user.userId);
     if (!user) return res.json({ success: false, message: "Invalid user" });
 
@@ -20,18 +20,29 @@ exports.putUser = async (req, res, next) => {
     if (contact) {
         updates.contact = contact;
     }
-    if (street) {
-        updates.address.street = street;
-    }
+
+    // if (street) {
+    //     updates.address.street = street;
+    // }
+    // if (city) {
+    //     updates.address.city = city;
+    // }
+    // if (postal_code) {
+    //     updates.address.postal_code = postal_code;
+    // }
+    // if (country) {
+    //     updates.address.country = country;
+    // }
+
+    //modification 
     if (city) {
-        updates.address.city = city;
+          updates.city = city ; 
     }
-    if (postal_code) {
-        updates.address.postal_code = postal_code;
+
+    if (locality) {
+        updates.locality = locality ; 
     }
-    if (country) {
-        updates.address.country = country;
-    }
+    
 
     if (req.file) {
         if (user.cloudinary_id != undefined) {
