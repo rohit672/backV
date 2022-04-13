@@ -8,7 +8,7 @@ exports.putUser = async (req, res, next) => {
     let { name, email, contact, city , locality } = req.body;
     const user = await User.findById(req.user.userId);
     
-    if (!user) return res.json({ success: false, message: "Invalid user" });
+    if (!user) return res.json({ success: false, message: "Invalid user to update" });
 
     let updates = {};
     updates.address = {};
