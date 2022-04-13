@@ -7,6 +7,7 @@ const fs = require("fs");
 exports.putUser = async (req, res, next) => {
     let { name, email, contact, city , locality } = req.body;
     const user = await User.findById(req.user.userId);
+    
     if (!user) return res.json({ success: false, message: "Invalid user" });
 
     let updates = {};
@@ -42,7 +43,7 @@ exports.putUser = async (req, res, next) => {
     if (locality) {
         updates.locality = locality ; 
     }
-    
+
 
     if (req.file) {
         if (user.cloudinary_id != undefined) {
@@ -60,10 +61,10 @@ exports.putUser = async (req, res, next) => {
     if (updatedUser) {
         return res.json({
             success: true,
-            message: "User details updated successfully",
+            message: "User Details Updated",
             user: updatedUser
         });
     } else {
-        return res.json({ success: false, message: "User details could not be updated" });
+        return res.json({ success: false, message: "Sorry, Details cannot be updated" });
     }
 };

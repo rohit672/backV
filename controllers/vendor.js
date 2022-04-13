@@ -132,6 +132,7 @@ exports.deleteItem = async (req, res, next) => {
 
 // PUT the updated vendor and return updated vendor
 exports.putVendor = async (req, res, next) => {
+    
     let { name, email, contact , city  , locality } = req.body;
     // Check if the vendor is registered (error not possible using frontend)
     const vendor = await Vendor.findById(req.user.userId);
@@ -157,8 +158,6 @@ exports.putVendor = async (req, res, next) => {
       updates.locality = locality ; 
     }
   
-
-
     if (req.file) {
         if (vendor.cloudinary_id != undefined) {
             await cloudinary.uploader.destroy(vendor.cloudinary_id);
